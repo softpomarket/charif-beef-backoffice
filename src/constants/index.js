@@ -6,11 +6,8 @@ export const HTTP_BASKET_ORDER_FAILED = "HTTP_BASKET_ORDER_FAILED";
 export const NOT_CONNECT_NETWORK = "NOT_CONNECT_NETWORK";
 export const NETWORK_CONNECTION_MESSAGE = "NETWORK_CONNECTION_MESSAGE";
 
-// export const serverUrl = "https://development-wisit-property-consignment.onrender.com"
-export const serverUrl = "https://development-kt-fruit-server.onrender.com";
-// export const serverUrl = "http:///localhost:3030"
-
-export const apiServerUrl = serverUrl; // + "" "/api/v1"
+export const serverUrl = `${process.env.NEXT_PUBLIC_API}`;
+export const apiServerUrl = serverUrl;
 
 export const imgDefaultUrl = `./assets/images/default/df-img.png`;
 export const videoDefaultUrl = `./assets/images/default/df-vdo.png`;
