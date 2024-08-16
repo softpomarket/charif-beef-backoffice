@@ -257,7 +257,7 @@ export default function ERP(props) {
                         cursor: "pointer",
                       }}
                     >
-                      ผลิตภัณฑ์สินค้าธัมมัง
+                      ผลิตภัณฑ์อื่นๆ
                     </label>
                   </Menu.Item>
                 </Menu>
