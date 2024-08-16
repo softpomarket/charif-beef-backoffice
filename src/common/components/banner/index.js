@@ -42,7 +42,7 @@ export default function Banner(props) {
                     loop={true}
                     className="mySwiper"
                 >
-                    {props.bannerData.map((banners, index) =>
+                    {props?.bannerData?.map((banners, index) =>
                         <SwiperSlide key={index}>
                             <a href={banners.bannerLocation} target="_blank">
                                 <img

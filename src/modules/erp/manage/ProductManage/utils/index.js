@@ -3,7 +3,7 @@ const obj = {
   mango: "ผลิตภัณฑ์จากมะม่วง",
   seasonal: "ผลิตภัณฑ์จากผลไม้ตามฤดูกาล",
   dried: "ผลิตภัณฑ์ผลไม่อบแห้ง",
-  thammang: "ผลิตภัณฑ์สินค้าธัมมัง",
+  thammang: "ผลิตภัณฑ์อื่นๆ",
 };
 
 export const title = (productCategory) => {

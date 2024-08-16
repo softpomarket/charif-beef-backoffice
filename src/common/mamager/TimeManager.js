@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import moment from "moment"
 
 const calculateDiscountTimeLeft = (date) => { // diff time by today
@@ -137,7 +138,7 @@ const secondsToMdhms = (value) => {
 
 const sumTime = (videoList) => {
     let tempTime = 0
-    videoList.map(val => {
+    videoList?.map(val => {
         tempTime += val.courseVideoDuration
     })
     

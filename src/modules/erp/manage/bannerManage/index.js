@@ -200,98 +200,102 @@ export default function BannerManage(props) {
     setTotal(result?.length);
     let tempList = [];
 
-    result?.map((val, index) => {
-      tempList.push({
-        index: index + 1,
-        name: val.BannerImage.googleImage,
+    if (result?.length > 0) {
+      result?.map((val, index) => {
+        tempList.push({
+          index: index + 1,
+          name: val.BannerImage.googleImage,
 
-        isActive: val.isActive, // สถานะการใช้งาน
+          isActive: val.isActive, // สถานะการใช้งาน
 
-        createdAt: val.createdAt
-          ? moment(val.createdAt).format(formatDate) +
+          createdAt: val.createdAt
+            ? moment(val.createdAt).format(formatDate) +
             "\n" +
             moment(val.createdAt).format("HH:mm")
-          : "-",
-        updatedAt: val.updatedAt
-          ? moment(val.updatedAt).format(formatDate) +
+            : "-",
+          updatedAt: val.updatedAt
+            ? moment(val.updatedAt).format(formatDate) +
             "\n" +
             moment(val.updatedAt).format("HH:mm")
-          : "-",
-        operator: (
-          <>
-            <Button
-              style={{
-                width: 35,
-                backgroundColor: "orange",
-                border: "1px solid orange",
-                color: "white",
-                borderRadius: 50,
-              }}
-              onClick={async () => {
-                formBanner.setFieldsValue({
-                  id: val.id,
-                  title: val.title,
-                  keyword: val.keyword,
-                  fileId: val.BannerImage.id,
-                  isActive: val.isActive,
-                });
-
-                setImagePropertyURL({
-                  loading: false,
-                  imageUrl: val.BannerImage.googleImage,
-                  imagePath: val.BannerImage.imagePath,
-                });
-
-                // console.log("propertyId : ", val.id)
-
-                // setVideoProductDetailURL({
-                //     loading: false,
-                //     videoUrl: val.videoURL
-                // })
-
-                setModalBanner({ isShow: true, title: "edit" });
-              }}
-            >
-              <div style={{ marginTop: 0, marginLeft: 0 }}>
-                <Icon
-                  icon="typcn:edit"
-                  style={{ color: "white", width: 20, height: 20 }}
-                />
-              </div>
-            </Button>
-            {"  "}
-
-            <Popconfirm
-              title="คุณยืนยันลบหรือไม่ ?"
-              okText={<span style={{ width: 50 }}>ใช่</span>}
-              onConfirm={async () => {
-                await handlePropertiesDelete(val.id);
-
-                // reload
-                await getBannersAll("");
-              }}
-              cancelText={<span style={{ width: 50 }}>ไม่ใช่</span>}
-            >
+            : "-",
+          operator: (
+            <>
               <Button
-                danger
-                type="primary"
                 style={{
                   width: 35,
+                  backgroundColor: "orange",
+                  border: "1px solid orange",
+                  color: "white",
                   borderRadius: 50,
+                }}
+                onClick={async () => {
+                  formBanner.setFieldsValue({
+                    id: val.id,
+                    title: val.title,
+                    keyword: val.keyword,
+                    fileId: val.BannerImage.id,
+                    isActive: val.isActive,
+                  });
+
+                  setImagePropertyURL({
+                    loading: false,
+                    imageUrl: val.BannerImage.googleImage,
+                    imagePath: val.BannerImage.imagePath,
+                  });
+
+                  // console.log("propertyId : ", val.id)
+
+                  // setVideoProductDetailURL({
+                  //     loading: false,
+                  //     videoUrl: val.videoURL
+                  // })
+
+                  setModalBanner({ isShow: true, title: "edit" });
                 }}
               >
                 <div style={{ marginTop: 0, marginLeft: 0 }}>
                   <Icon
-                    icon="fluent:delete-16-regular"
+                    icon="typcn:edit"
                     style={{ color: "white", width: 20, height: 20 }}
                   />
                 </div>
               </Button>
-            </Popconfirm>
-          </>
-        ),
-      });
-    });
+              {"  "}
+
+              <Popconfirm
+                title="คุณยืนยันลบหรือไม่ ?"
+                okText={<span style={{ width: 50 }}>ใช่</span>}
+                onConfirm={async () => {
+                  await handlePropertiesDelete(val.id);
+
+                  // reload
+                  await getBannersAll("");
+                }}
+                cancelText={<span style={{ width: 50 }}>ไม่ใช่</span>}
+              >
+                <Button
+                  danger
+                  type="primary"
+                  style={{
+                    width: 35,
+                    borderRadius: 50,
+                  }}
+                >
+                  <div style={{ marginTop: 0, marginLeft: 0 }}>
+                    <Icon
+                      icon="fluent:delete-16-regular"
+                      style={{ color: "white", width: 20, height: 20 }}
+                    />
+                  </div>
+                </Button>
+              </Popconfirm>
+            </>
+          ),
+        });
+      })
+    }
+
+
     setList(tempList);
     searchNameRef.current = name;
 

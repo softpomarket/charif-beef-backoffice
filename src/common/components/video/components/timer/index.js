@@ -33,7 +33,7 @@
 //             // console.log("info : ", courseId, uid, videoId)
 
 //             let addTimer = (videoCourseTimer ? videoCourseTimer.timer : 0) + s
-//             resultGetTimer.map(val => val.videoCourseId === videoId ? {
+//             resultGetTimer?.map(val => val.videoCourseId === videoId ? {
 //                 learnerVideoCourseTimerId: val.learnerVideoCourseTimerId,
 //                 uid: val.uid,
 //                 courseId: val.courseId,
@@ -57,10 +57,10 @@
 
 //             if (resultVideoCourseList) {
 //                 // sum time video course
-//                 resultVideoCourseList.map(val => sumTimeVideoCourse += val.courseVideoDuration)
+//                 resultVideoCourseList?.map(val => sumTimeVideoCourse += val.courseVideoDuration)
 
 //                 // sum timer watch video course
-//                 resultGetTimer.map(val => {
+//                 resultGetTimer?.map(val => {
 //                     let videoCourseDuration = resultVideoCourseList.filter(val2 => val2.courseVideoId === val.videoCourseId)[0]?.courseVideoDuration
 //                     if (videoCourseDuration >= val.timer) {
 //                         sumTimerWatchVideoCourse += val.timer

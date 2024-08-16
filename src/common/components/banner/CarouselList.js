@@ -24,7 +24,7 @@ export default function CarouselList(props) {
 
     return (
         <div className="banner">
-            {props.data?.length > 0 ?
+            {props?.data?.length > 0 ?
                 <Swiper
                     modules={[Pagination, Navigation, Mousewheel, Keyboard, Autoplay]}
                     slidesPerView={props.data?.length <= 1 ? 1 : (width > 1500 ? 3 : ((width >= 760 && width <= 1500) ? 2 : 1))}
@@ -41,7 +41,7 @@ export default function CarouselList(props) {
                     loop={true}
                     className="mySwiper"
                 >
-                    {props.data.map((item, index) =>
+                    {props?.data?.map((item, index) =>
                         <SwiperSlide key={index}>
                             <div
                                 style={{

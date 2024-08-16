@@ -357,7 +357,7 @@ export default function BestSellingManage(props) {
     console.log("best selling", result);
     let tempList = [];
     result?.result?.map((val, index) => {
-      console.log(val.PickUpGallery);
+      // console.log(val.PickUpGallery);
       tempList.push({
         index: index + 1,
         name: val.Product.title,
@@ -366,13 +366,13 @@ export default function BestSellingManage(props) {
 
         createdAt: val.Product.createdAt
           ? moment(val.Product.createdAt).format(formatDate) +
-            "\n" +
-            moment(val.Product.createdAt).format("HH:mm")
+          "\n" +
+          moment(val.Product.createdAt).format("HH:mm")
           : "-",
         updatedAt: val.Product.updatedAt
           ? moment(val.Product.updatedAt).format(formatDate) +
-            "\n" +
-            moment(val.Product.updatedAt).format("HH:mm")
+          "\n" +
+          moment(val.Product.updatedAt).format("HH:mm")
           : "-",
         operator: (
           <>
@@ -685,7 +685,7 @@ export default function BestSellingManage(props) {
     getBaseApi();
   }, []);
 
-  useEffect(() => {}, [propertyGalleryDisplay]);
+  useEffect(() => { }, [propertyGalleryDisplay]);
 
   return (
     <Row>
@@ -821,12 +821,14 @@ export default function BestSellingManage(props) {
                     }}
                   >
                     {/* fetch category */}
-                    {products &&
-                      products?.map((product) => (
+                    {products?.length > 0 ?
+                      products.map((product) => (
                         <Option key={product.id} value={product.id}>
                           {product.title}
                         </Option>
-                      ))}
+                      ))
+                      : []
+                    }
                   </Select>
                 </Form.Item>
               </Col>

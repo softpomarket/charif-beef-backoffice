@@ -330,7 +330,7 @@ const Controls = forwardRef(
                                             color: "white"
                                         }}
                                     >
-                                        {[0.25, 0.5, 1, 1.5, 1.75, 2].map((rate) => (
+                                        {[0.25, 0.5, 1, 1.5, 1.75, 2]?.map((rate) => (
                                             <Button
                                                 key={rate}
                                                 onClick={() => {

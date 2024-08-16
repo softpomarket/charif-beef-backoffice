@@ -6,7 +6,7 @@ export const HTTP_BASKET_ORDER_FAILED = "HTTP_BASKET_ORDER_FAILED";
 export const NOT_CONNECT_NETWORK = "NOT_CONNECT_NETWORK";
 export const NETWORK_CONNECTION_MESSAGE = "NETWORK_CONNECTION_MESSAGE";
 
-export const serverUrl = `${process.env.NEXT_PUBLIC_API}`;
+export const serverUrl = `${process.env.REACT_APP_API_URL}`;
 export const apiServerUrl = serverUrl;
 
 export const imgDefaultUrl = `./assets/images/default/df-img.png`;
