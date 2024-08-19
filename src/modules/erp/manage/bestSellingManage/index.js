@@ -51,7 +51,7 @@ const columns = [
     width: "5%",
   },
   {
-    title: "รายการส่วนเสริมรถบรรทุก ISUZU",
+    title: "รายการผลิตภัณฑ์ขายดี",
     dataIndex: "name",
     width: "30%",
   },

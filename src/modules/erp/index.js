@@ -119,7 +119,7 @@ export default function ERP(props) {
                       >
                         <img
                           src="/assets/images/logo/logo-kt-fruit.png"
-                          alt="logo-isuzu"
+                          alt="logo-kt-fruit"
                         />
                         <div>
                           <span style={{ fontWeight: "bolder" }}>
