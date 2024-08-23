@@ -10,7 +10,6 @@ export default function Card(props) {
 
     const navigate = useNavigate()
 
-    // console.log("props : ", props)
 
     return (
         <div

@@ -9,11 +9,11 @@ const getErpSigninFetch = async (data) => {
         Accept: "application/json",
       },
     });
-    console.log("X1--- : ", result)
+
     return result?.data ?? null;
   } catch (err) {
     // status 404
-    console.log("X2--- : ", err)
+
     return null;
   }
 };

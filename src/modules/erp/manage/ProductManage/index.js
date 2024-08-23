@@ -37,8 +37,6 @@ import {
   updateProductFetch,
   updateTruckFetch,
 } from "./API/productApi";
-import { v4 as uuidv4, validate as uuidValidate } from "uuid";
-import { listTitle, productName, searchTitle, title } from "./utils";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -46,7 +44,7 @@ const { Option } = Select;
 
 const formatDate = "DD/MM/YYYY";
 
-export default function ProductManage({ productCategory }) {
+export default function ProductManage() {
   const columns = [
     {
       title: "No.",
@@ -54,7 +52,7 @@ export default function ProductManage({ productCategory }) {
       width: "5%",
     },
     {
-      title: listTitle(productCategory),
+      title: "รายการผลิตภัณฑ์",
       dataIndex: "name",
       width: "30%",
     },
@@ -107,11 +105,10 @@ export default function ProductManage({ productCategory }) {
     },
   ];
   const [list, setList] = useState([]);
-  console.log("list", list);
+
   const [loading, setLoading] = useState(true);
   const [loadingPropertyGallery, setLoadingPropertyGallery] = useState(false);
 
-  const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
 
   const [formProperty] = Form.useForm();
@@ -182,7 +179,6 @@ export default function ProductManage({ productCategory }) {
       if (info.file.status !== "uploading") {
         let result = info.file.response;
         if (result?.status) {
-          console.log("A1 --- : ", result.result.googleImage);
           setImagePropertyURL({
             imageUrl: result.result.googleImage,
             loading: false,
@@ -218,150 +214,24 @@ export default function ProductManage({ productCategory }) {
     },
   };
 
-  // const optionPropertyGalleryImage = {
-  //   name: "file",
-  //   action: `${serverUrl}/api/v1/back-office/upload-files`,
-  //   data: {
-  //     bucket: "truck",
-  //   },
-  //   headers: {
-  //     Authorization: `Bearer ${accessToken}`,
-  //   },
-  //   async onChange(info) {
-  //     let result = info.file.response;
-  //     if (info.file.status !== "uploading") {
-  //       if (result?.status) {
-  //         setImagePropertyGalleryURL({
-  //           // imageUrl: result.formData.fileUrl,
-  //           loading: false,
-  //         });
-  //       }
-  //     } else {
-  //       setImagePropertyGalleryURL({
-  //         // imageUrl: imagePropertyGalleryURL.imageUrl,
-  //         loading: true,
-  //       });
-  //     }
-
-  //     console.log("A1 --- : ", result?.results);
-  //     if (info.file.status === "done") {
-  //       setLoadingPropertyGallery(true);
-
-  //       await getProductsAll("");
-  //       const [fill] = result?.results;
-  //       const tempObj = { ...fill, id: uuidv4() };
-  //       console.log("fill", fill);
-  //       setPropertyGalleryDisplay((prev) => [...prev, tempObj]);
-  //       // setPropertyGallery((prev) => [...prev, fill]);
-
-  //       Notification("success", "เเจ้งเตือน!", "อัพโหลดรูปภาพสำเร็จ");
-
-  //       // let body = {
-  //       //     propertyId,
-  //       //     image: result.formData.fileUrl
-  //       // }
-  //       // const resultPropertyImage = await insertPropertyImageFetch(null, body, accessToken)
-  //       // isActivePropertyGalleryRef.current = false
-
-  //       // let obj = {
-  //       //     propertyId,
-  //       //     image: result.formData.fileUrl,
-  //       //     id: resultPropertyImage?.id
-  //       // }
-  //       // let tmpPropertyGallery = propertyGallery
-  //       // tmpPropertyGallery?.push(obj)
-  //       // // console.log("tmpPropertyGallery : ", tmpPropertyGallery)
-  //       // setPropertyGallery(tmpPropertyGallery)
-
-  //       setLoadingPropertyGallery(false);
-  //     } else if (info.file.status === "error") {
-  //       Notification(
-  //         "error",
-  //         "เเจ้งเตือน!",
-  //         "อัพโหลดรูปภาพไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
-  //       );
-  //     }
-  //   },
-  //   progress: {
-  //     strokeColor: {
-  //       "0%": "#FF7F00",
-  //       "100%": "#FF7F00",
-  //     },
-  //     strokeWidth: 3,
-  //     width: "10%",
-  //     format: (percent) => `${parseFloat(percent.toFixed(0))}%`,
-  //   },
-  // };
-
-  // function generateNewFileName(oldFileName) {
-  //     // สร้างชื่อไฟล์ใหม่ที่นี่ เช่น เพิ่ม timestamp เป็นส่วนหนึ่งของชื่อไฟล์
-  //     const timestamp = Date.now()
-  //     const extension = oldFileName.split('.').pop()
-  //     const newFileName = `${props.username}-${timestamp}.${extension}`
-  //     return newFileName
-  // }
-
-  // const optionProductDetailVideo = {
-  //     name: 'file',
-  //     action: `${apiServerUrl}/upload/file`,
-  //     data: {
-  //         name: "admin",
-  //         path: "upload_file/video/product"
-  //     },
-  //     headers: {
-  //         authorization: 'authorization-text',
-  //     },
-  //     onChange(info) {
-  //         if (info.file.status !== 'uploading') {
-  //             if (info.fileList.length > 0) {
-  //                 setVideoProductDetailURL({
-  //                     videoUrl: info.file.response.filePath,
-  //                     loading: false,
-  //                 })
-  //             }
-  //         } else {
-  //             setVideoProductDetailURL({
-  //                 loading: true,
-  //                 videoUrl: videoProductDetailURL.videoUrl
-  //             })
-  //         }
-
-  //         if (info.file.status === 'done') {
-  //             Notification("success", "เเจ้งเตือน!", "อัพโหลดวิดีโอสำเร็จ")
-  //         } else if (info.file.status === 'error') {
-  //             Notification("error", "เเจ้งเตือน!", "อัพโหลดวิดีโอไม่สำเร็จ กรุณาลองใหม่อีกครั้ง")
-  //         }
-  //     },
-  //     progress: {
-  //         strokeColor: {
-  //             '0%': '#FF7F00',
-  //             '100%': '#FF7F00',
-  //         },
-  //         strokeWidth: 3,
-  //         width: '10%',
-  //         format: percent => `${parseFloat(percent.toFixed(0))}%`,
-  //     }
-  // }
-
   const getProductsAll = async (name) => {
     setLoading(true);
 
     let param = {
       keyword: name,
     };
-    const result = await getProductFetch(
-      param,
-      null,
-      accessToken,
-      productCategory
-    );
-    console.log("getProductFetch : ", result);
+    const result = await getProductFetch(param, null, accessToken);
+
     propertyRef.current = result?.result;
     setTotal(result?.length);
 
-    console.log("GET", result);
-
     let tempList = [];
+    if (result.status === 204 || result.length === 0) {
+      setList(tempList);
+      setLoading(false);
+      return;
+    }
+
     result?.result?.map((val, index) => {
       tempList.push({
         index: index + 1,
@@ -393,7 +263,7 @@ export default function ProductManage({ productCategory }) {
                 formProperty.setFieldsValue({
                   id: val.id,
                   title: val.title,
-
+                  categoryId: val.categoriesId,
                   keyword: val.keyword,
                   subTitle: val.subTitle,
                   price: val.price,
@@ -404,8 +274,8 @@ export default function ProductManage({ productCategory }) {
 
                 setImagePropertyURL({
                   loading: false,
-                  imageUrl: val.ProductImageCover.googleImage,
-                  imagePath: val.ProductImageCover.imagePath,
+                  imageUrl: val.BeefImage.googleImage,
+                  imagePath: val.BeefImage.imagePath,
                 });
 
                 // setPropertyId(val.id);
@@ -478,26 +348,17 @@ export default function ProductManage({ productCategory }) {
     // const listOfURL = propertyGallery?.map((property) => property.imagePath);
 
     let body = {
+      price: 0,
       title: values.title,
-      subTitle: values.subTitle,
-      description: values.detail,
       keyword: values.keyword,
-      price: values.price,
+      description: detail,
       isActive: values.isActive,
-      ProductCoverImage: {
-        imagePath: imagePropertyURL.imagePath,
-      },
+      imagePath: imagePropertyURL.imagePath,
+      categoriesId: values.categoryId,
     };
 
-    // console.log("body : ", body)
-
     if (modalProperty.title === "add") {
-      const result = await insertProductFetch(
-        null,
-        body,
-        accessToken,
-        productCategory
-      );
+      const result = await insertProductFetch(null, body, accessToken);
 
       if (result.status) {
         Notification("success", "สร้างสำเร็จ");
@@ -505,13 +366,8 @@ export default function ProductManage({ productCategory }) {
         Notification("error", "ไม่สามารถสร้างได้ กรุณาลองใหม่อีกครั้ง");
       }
     } else if (modalProperty.title === "edit") {
-      const result = await updateProductFetch(
-        param,
-        body,
-        accessToken,
-        productCategory
-      );
-      console.log("UPDATE TRUCK", result);
+      const result = await updateProductFetch(param, body, accessToken);
+
       if (result.status) {
         Notification("success", "เเก้ไขสำเร็จ");
       } else {
@@ -539,43 +395,13 @@ export default function ProductManage({ productCategory }) {
     let param = {
       id,
     };
-    const result = await deleteProductByIdFetch(
-      param,
-      null,
-      accessToken,
-      productCategory
-    );
-    console.log("result", result);
+    const result = await deleteProductByIdFetch(param, null, accessToken);
+
     if (result.status) {
       Notification("success", "ลบสำเร็จ");
     } else {
       Notification("error", "ไม่สามารถลบได้ กรุณาลองใหม่อีกครั้ง");
     }
-  };
-
-  const handlePropertiesGalleryDelete = async (id) => {
-    // let param = {
-    //   id,
-    // };
-    // console.log("param : ", param)
-    // const result = await deletePropertyImageByIdFetch(param, null, accessToken);
-    // if (result && result.isSuccess) {
-    let tmpPropertyGallery = propertyGallery?.map((fill) =>
-      fill.id === id ? { ...fill, imagePath: null, id: null } : fill
-    );
-
-    let tmpPropertyGalleryDisplay = propertyGalleryDisplay?.filter(
-      (fill) => fill.id !== id
-    );
-
-    // console.log("tmpPropertyGallery : ", tmpPropertyGallery)
-    setPropertyGalleryDisplay(tmpPropertyGalleryDisplay);
-    setPropertyGallery(tmpPropertyGallery);
-
-    Notification("success", "ลบสำเร็จ");
-    // } else {
-    //   Notification("error", "ไม่สามารถลบได้ กรุณาลองใหม่อีกครั้ง");
-    // }
   };
 
   const onPagine = (n) => {
@@ -589,8 +415,8 @@ export default function ProductManage({ productCategory }) {
       title: undefined,
       isActive: undefined,
       isClosed: undefined,
+      categoryId: undefined,
       price: undefined,
-      subTitle: undefined,
       detail: undefined,
     });
 
@@ -618,60 +444,22 @@ export default function ProductManage({ productCategory }) {
     });
   };
 
-  // const setFormPropertyGalleryDefault = () => {
-  //     // formPropertyGallery.setFieldsValue({
-  //     //     propertyId: undefined,
-  //     // })
-
-  //     setModalPropertyGallery({
-  //         isShow: false,
-  //         title: null
-  //     })
-  // }
-
-  // const getPropertyTypesAll = async () => {
-  //   let param = {
-  //     name: "",
-  //     isActive: "",
-  //     isClosed: "",
-  //     page: 1,
-  //     size: 20,
-  //   };
-  //   let result = await getPropertyTypesFetch(param, null, accessToken);
-
-  //   setPropertyTypes(result?.results);
-  // };
-
-  // const getAllCategories = async () => {
-  //   try {
-  //     const res = await fetch(`${serverUrl}/api/v1/truck/category`);
-  //     const data = await res.json();
-
-  //     setCategories(data.results);
-  //   } catch (error) {
-  //     console.log("Fail to get categories with error:", error);
-  //   }
-  // };
-
   const getBaseApi = async () => {
     // getPropertyTypesAll();
     // getAllCategories();
     getProductsAll("");
   };
 
-  // console.log("propertyGallery : ", propertyGallery)
-
   useEffect(() => {
-    // console.log("accessToken : ", accessToken)
     getBaseApi();
-  }, [productCategory]);
+  }, []);
 
   useEffect(() => {}, [propertyGalleryDisplay]);
 
   return (
     <Row>
       <Col span={12}>
-        <label>{title(productCategory)}</label>
+        <label>จัดการผลิตภัณฑ์</label>
       </Col>
 
       <Col span={12} style={{ paddingBottom: 20 }}>
@@ -689,18 +477,9 @@ export default function ProductManage({ productCategory }) {
                 name="title"
                 style={{ width: "100%" }}
               >
-                <Input placeholder={searchTitle(productCategory)} />
+                <Input placeholder="ชื่อผลิตภัณฑ์" />
               </Form.Item>
             </div>
-
-            {/* <div style={{ paddingLeft: 10 }}>
-                            <Form.Item
-                                label="ช่วงวันที่สร้าง" name="dateRange"
-                                style={{ width: '100%' }}
-                            >
-                                <RangePicker />
-                            </Form.Item>
-                        </div> */}
 
             <div style={{ paddingLeft: 10, marginTop: -24 }}>
               <Button
@@ -763,7 +542,7 @@ export default function ProductManage({ productCategory }) {
           // default
           setFormPropertyDefault();
         }}
-        width={"90%"}
+        width={785}
         onOk={() => {
           formProperty.submit();
         }}
@@ -786,7 +565,7 @@ export default function ProductManage({ productCategory }) {
 
                   <Form.Item
                     name="title"
-                    label={searchTitle(productCategory)}
+                    label="ชื่อผลิตภัณฑ์"
                     rules={[
                       {
                         required: true,
@@ -808,7 +587,7 @@ export default function ProductManage({ productCategory }) {
                   </Form.Item>
                 </Col>
 
-                <Col span={24}>
+                {/* <Col span={24}>
                   <Form.Item
                     name="price"
                     label="ราคา"
@@ -816,23 +595,42 @@ export default function ProductManage({ productCategory }) {
                   >
                     <Input placeholder="กรอกข้อความ" />
                   </Form.Item>
-                </Col>
-
-                <Col span={24}>
+                </Col> */}
+                <Col xs={24} md={12} xl={12}>
                   <Form.Item
-                    name="subTitle"
-                    label="รายละเอียดย่อย (เเสดงตรงการ์ด หน้าหลัก)"
+                    name="categoryId"
+                    label="หมวดหมู่ผลิตภัณฑ์"
                     rules={[
-                      { required: true, message: "กรุณากรอกรายละเอียดย่อย" },
+                      {
+                        required: true,
+                        message: "กรุณาเลือกหมวดหมู่ผลิตภัณฑ์",
+                      },
                     ]}
                   >
-                    <TextArea
-                      placeholder="กรอกข้อความ"
-                      autoSize={{
-                        minRows: 8,
-                        maxRows: 10,
-                      }}
-                    />
+                    <Select
+                      showSearch
+                      style={{ width: "100%" }}
+                      optionFilterProp="children"
+                      allowClear
+                      placeholder="เลือกรายการ"
+                      onChange={(value) => setCategoryId(value)}
+                    >
+                      <Option key={1} value={1}>
+                        เนื้อสด
+                      </Option>
+                      <Option key={2} value={2}>
+                        เนื้อสไลด์( โคขุน )
+                      </Option>
+                      <Option key={3} value={3}>
+                        เนื้อสเต็ก ( โคขุน )
+                      </Option>
+                      <Option key={4} value={4}>
+                        เนื้อแร็ปขึ้นก้อน
+                      </Option>
+                      <Option key={5} value={5}>
+                        เนื้อแปรรูป
+                      </Option>
+                    </Select>
                   </Form.Item>
                 </Col>
               </Row>
@@ -842,14 +640,12 @@ export default function ProductManage({ productCategory }) {
               <Row gutter={[24, 0]}>
                 <Col xs={24} md={24} xl={24}>
                   <div style={{ display: "grid" }}>
-                    <label style={{ paddingBottom: 6 }}>
-                      {"ภาพปก" + productName(productCategory)}
-                    </label>
+                    <label style={{ paddingBottom: 6 }}>ภาพปกผลิตภัณฑ์</label>
                     {imagePropertyURL?.imageUrl ? (
                       <img
                         style={{
                           borderRadius: 8,
-                          maxWidth: "100%",
+                          height: 200,
                           border: "1px solid #EEEEEE",
                         }}
                         src={`${imagePropertyURL.imageUrl}`}
@@ -857,7 +653,7 @@ export default function ProductManage({ productCategory }) {
                     ) : (
                       <img
                         style={{
-                          width: "100%",
+                          height: 200,
                           borderRadius: 8,
                           border: "1px solid #C4C4C4",
                         }}
@@ -888,30 +684,6 @@ export default function ProductManage({ productCategory }) {
                       </Upload>
                     </div>
                   </div>
-                </Col>
-                <Col xs={24} md={12} xl={12}>
-                  <Form.Item
-                    name="isActive"
-                    label="สถานะการใช้งาน"
-                    rules={[
-                      { required: true, message: "กรุณาเลือกสถานะการใช้งาน" },
-                    ]}
-                  >
-                    <Select
-                      showSearch
-                      style={{ width: "100%" }}
-                      optionFilterProp="children"
-                      allowClear
-                      placeholder="เลือกสถานะ"
-                    >
-                      <Option key={0} value={true}>
-                        เปิดใช้งาน
-                      </Option>
-                      <Option key={1} value={false}>
-                        ปิดใช้งาน
-                      </Option>
-                    </Select>
-                  </Form.Item>
                 </Col>
 
                 {/* <Col xs={24} md={12} xl={12}>
@@ -954,7 +726,7 @@ export default function ProductManage({ productCategory }) {
             <Col span={24}>
               <Form.Item
                 name="detail"
-                label={`รายละเอียด${productName(productCategory)}`}
+                label="รายละเอียดรายละเอียดผลิตภัณฑ์"
                 rules={[{ required: true, message: "กรุณากรอกรายละเอียด" }]}
               >
                 <CKEditor
@@ -987,71 +759,46 @@ export default function ProductManage({ productCategory }) {
                         "redo",
                       ],
                       removeButtons: "Subscript,Superscript",
-                      height: 550,
+                      height: 300,
                     },
                   }}
                   data={detail}
                   onBlur={(event, editor) => {
                     const data = editor.getData();
+
+                    setDetail(data);
                     formProperty.setFieldValue("detail", data);
                   }}
                 />
               </Form.Item>
             </Col>
+            <Col span={6}>
+              <Form.Item
+                name="isActive"
+                label="สถานะการใช้งาน"
+                rules={[
+                  { required: true, message: "กรุณาเลือกสถานะการใช้งาน" },
+                ]}
+              >
+                <Select
+                  showSearch
+                  style={{ width: "100%" }}
+                  optionFilterProp="children"
+                  allowClear
+                  placeholder="เลือกสถานะ"
+                >
+                  <Option key={0} value={true}>
+                    เปิดใช้งาน
+                  </Option>
+                  <Option key={1} value={false}>
+                    ปิดใช้งาน
+                  </Option>
+                </Select>
+              </Form.Item>
+            </Col>
           </Row>
         </Form>
       </Modal>
-
-      {/* <Modal
-                title={<strong><label className="topic-color-bold">{modalPropertyGallery.title}</label></strong>}
-                visible={modalPropertyGallery.isShow}
-                zIndex={1000}
-                onCancel={() => {
-                    // default
-                    setFormPropertyGalleryDefault()
-                }}
-                width={500}
-                onOk={() => {
-                    // formPropertyGallery.submit()
-                }}
-                // okText={<label style={{ width: 50, cursor: 'pointer' }}>บันทึก</label>}
-                // cancelText={<label style={{ width: 50, cursor: 'pointer' }}>ยกเลิก</label>}
-                footer={[]}
-            >
-                <Row>
-                    <Col span={24}>
-                        <div style={{ display: "grid" }}>
-                            <label style={{ paddingBottom: 6 }}>ภาพปกอสังหาฯ</label>
-                            {imagePropertyGalleryURL?.imageUrl ?
-                                <img
-                                    style={{ borderRadius: 8, maxWidth: 300, border: "1px solid #EEEEEE" }}
-                                    src={`${imagePropertyGalleryURL.imageUrl}`}
-                                />
-                                :
-                                <img
-                                    style={{ width: "100%", borderRadius: 8, border: "1px solid #C4C4C4" }}
-                                    src={`./assets/images/default/df-img.png`}
-                                />
-                            }
-                            <div style={{ paddingTop: 12 }}>
-                                <Upload
-                                    {...optionPropertyGalleryImage}
-                                    accept='image/jpeg, image/png, image/jfif'
-                                    style={{ width: "100%" }}
-                                    maxCount={1}
-                                    showUploadList={{ showRemoveIcon: false }}
-                                >
-                                    <Button
-                                        type="default"
-                                        style={{ width: "100%" }}
-                                        icon={imagePropertyGalleryURL.loading ? <LoadingOutlined /> : <UploadOutlined />}
-                                    >อัพโหลดรูปภาพ</Button>
-                                </Upload>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-            </Modal> */}
     </Row>
   );
 }

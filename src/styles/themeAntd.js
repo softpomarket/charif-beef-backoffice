@@ -1,7 +1,7 @@
 import "./fonts.css";
 
 const themeAntd = {
-  colorPrimary: "#168E46",
+  colorPrimary: "#9D1F2A",
   fontSize: 16,
   fontFamily: "Kanit",
 };

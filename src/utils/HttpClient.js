@@ -11,8 +11,6 @@ const isAbsoluteURLRegex = /^(?:\w+:)\/\//;
 Axios.interceptors.request.use(async (config) => {
   if (!isAbsoluteURLRegex.test(config.url)) {
     config.url = join(apiServerUrl, config.url);
-    console.log("X3--- : ", config.url)
-    console.log("X4--- : ", apiServerUrl)
   }
   config.timeout = 10000; // 10 Second
   return config;

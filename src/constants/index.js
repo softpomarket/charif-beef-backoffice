@@ -30,13 +30,8 @@ export const server = {
   GET_BEST_SELLING_URL: `/api/v1/back-office/product/best-salling`,
   GET_PICKUPS_URL: `/api/v1/back-office/pickup`,
   GET_CATEGORY_URL: `/api/v1/truck/category`,
-  GET_COCONUT_URL: `/api/v1/back-office/product/coconut`,
-  GET_MANGO_URL: `/api/v1/back-office/product/mango`,
-  GET_DRIED_URL: `/api/v1/back-office/product/dried`,
-  GET_SEASONAL_URL: `/api/v1/back-office/product/seasonal`,
-  GET_THAMMANG_URL: `/api/v1/back-office/product/thammang`,
-  GET_PROPERTIES_URL: `/api/properties`,
-  GET_PROPERTIES_BY_ID_URL: `/api/properties`,
+
+  GET_BEEF_URL: `/api/v1/back-office/beef`,
   GET_HOMEPAGE_PROPERTIES_URL: `/api/homePage/properties`,
   GET_PROPERTY_DETAIL_PAGE_URL: `/api/propertyDetailPage`,
 
@@ -44,32 +39,12 @@ export const server = {
   INSERT_PICKUP_URL: `/api/v1/back-office/pick-up`,
   INSERT_BEST_SELLING_URL: `/api/v1/back-office/product/best-salling`,
   INSERT_COCONUT_URL: `/api/v1/back-office/product/coconut`,
-  INSERT_MANGO_URL: `/api/v1/back-office/product/mango`,
-  INSERT_DRIED_URL: `/api/v1/back-office/product/dried`,
-  INSERT_SEASONAL_URL: `/api/v1/back-office/product/seasonal`,
-  INSERT_THAMMANG_URL: `/api/v1/back-office/product/thammang`,
+  INSERT_BEEF_URL: `/api/v1/back-office/beef`,
+
   INSERT_BEST_SELLING_URL: `/api/v1/back-office/product/best-salling`,
   INSERT_PROPERTIES_URL: `/api/properties`,
 
-  UPDATE_PROPERTIES_URL: `/api/properties`,
-  UPDATE_PICKUP_URL: `/api/v1/back-office/pick-up`,
-  UPDATE_BEST_SELLING_URL: `/api/v1/back-office/product/best-salling`,
-  UPDATE_COCONUT_BY_ID_URL: `/api/v1/back-office/product/coconut`,
-  UPDATE_MANGO_BY_ID_URL: `/api/v1/back-office/product/mango`,
-  UPDATE_DRIED_BY_ID_URL: `/api/v1/back-office/product/dried`,
-  UPDATE_SEASONAL_BY_ID_URL: `/api/v1/back-office/product/seasonal`,
-  UPDATE_THAMMANG_BY_ID_URL: `/api/v1/back-office/product/thammang`,
-  UPDATE_BANNERS_URL: `/api/v1/back-office/banner`,
-
-  DELETE_PROPERTIES_BY_ID_URL: `/api/properties`,
-  DELETE_BEST_SELLING_BY_ID_URL: `/api/v1/back-office/product/best-salling`,
-  DELETE_PICKUP_BY_ID_URL: `/api/v1/back-office/pickup`,
-  DELETE_COCONUT_BY_ID_URL: `/api/v1/back-office/product/coconut`,
-  DELETE_MANGO_BY_ID_URL: `/api/v1/back-office/product/mango`,
-  DELETE_DRIED_BY_ID_URL: `/api/v1/back-office/product/dried`,
-  DELETE_SEASONAL_BY_ID_URL: `/api/v1/back-office/product/seasonal`,
-  DELETE_THAMMANG_BY_ID_URL: `/api/v1/back-office/product/thammang`,
-  DELETE_BANNERS_URL: `/api/v1/back-office/banner`,
+  UPDATE_BEEF_BY_ID_URL: `/api/v1/back-office/beef`,
 
   // ------------------------ PROPERTIES TYPE ------------------------------------------------
   GET_PROPERTY_TYPES_URL: `/api/propertyTypes`,
@@ -80,6 +55,7 @@ export const server = {
   UPDATE_PROPERTY_TYPES_URL: `/api/propertyTypes`,
 
   DELETE_PROPERTY_TYPES_BY_ID_URL: `/api/propertyTypes`,
+  DELETE_BEEF_BY_ID_URL: `/api/v1/back-office/beef`,
 
   // ------------------------ PROPERTIES IMAGE -----------------------------------------------
   INSERT_PROPERTY_IMAGE_URL: `/api/property-images`,

@@ -23,7 +23,6 @@ export default function LoginERP() {
     };
 
     const res = await getErpSigninFetch(obj);
-    console.log("result : ", res);
 
     if (res?.status) {
       sessionStorage.setItem(
@@ -43,7 +42,7 @@ export default function LoginERP() {
   };
 
   const openAdminManage = (roles, username) => {
-    navigate("/kt-fruit-back-office", {
+    navigate("/charif-beef-back-office", {
       state: {
         roles,
         username,

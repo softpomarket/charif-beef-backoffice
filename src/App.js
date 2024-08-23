@@ -20,7 +20,7 @@ const App = ({ authorized, firebase, user }) => (
         />
         <Route
           exact
-          path="/kt-fruit-back-office"
+          path="/charif-beef-back-office"
           element={
             <ERP authorized={authorized} firebase={firebase} user={user} />
           }

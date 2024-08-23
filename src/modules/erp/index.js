@@ -8,9 +8,8 @@ import { Button, Layout, Menu } from "antd";
 import { PageHeader } from "@ant-design/pro-layout";
 import { useNavigate, useLocation } from "react-router-dom";
 import LoadingPage from "../../common/components/loading/page";
-import BannerManage from "./manage/bannerManage";
+
 import ProductManage from "./manage/ProductManage";
-import BestSellingManage from "./manage/bestSellingManage";
 
 const { Sider } = Layout;
 
@@ -20,49 +19,13 @@ export default function ERP(props) {
 
   const [loading, setLoading] = useState(true);
 
-  const [selectedMenuItem, setSelectedMenuItem] = useState("manage-banner");
+  const [selectedMenuItem, setSelectedMenuItem] = useState("manage-product");
 
   const componentsSwitch = (type) => {
     switch (type) {
-      case "manage-banner":
-        return <BannerManage username={location.state.username} />;
-      case "manage-best-selling":
-        return <BestSellingManage username={location.state.username} />;
-      case "manage-coconut":
-        return (
-          <ProductManage
-            username={location.state.username}
-            productCategory="coconut"
-          />
-        );
-      case "manage-mango":
-        return (
-          <ProductManage
-            username={location.state.username}
-            productCategory="mango"
-          />
-        );
-      case "manage-seasonal":
-        return (
-          <ProductManage
-            username={location.state.username}
-            productCategory="seasonal"
-          />
-        );
-      case "manage-dried":
-        return (
-          <ProductManage
-            username={location.state.username}
-            productCategory="dried"
-          />
-        );
-      case "manage-thammang":
-        return (
-          <ProductManage
-            username={location.state.username}
-            productCategory="thammang"
-          />
-        );
+      case "manage-product":
+        return <ProductManage username={location.state.username} />;
+
       default:
         return null;
     }
@@ -72,7 +35,7 @@ export default function ERP(props) {
     setLoading(true);
 
     const accessToken = sessionStorage.getItem("accessToken");
-    // console.log("X --- : ", accessToken)
+
     if (!accessToken) {
       navigate("/");
     } else {
@@ -118,15 +81,15 @@ export default function ERP(props) {
                         }}
                       >
                         <img
-                          src="/assets/images/logo/logo-kt-fruit.png"
-                          alt="logo-kt-fruit"
+                          src="/assets/images/logo/logo-charif-beef.png"
+                          alt="logo-charif-beef"
                         />
                         <div>
                           <span style={{ fontWeight: "bolder" }}>
                             Back office
                           </span>
                           <br />
-                          of KT Fruit
+                          of Charif Beef
                           {/* <div></div> */}
                         </div>
                       </div>
@@ -153,7 +116,7 @@ export default function ERP(props) {
                     // const accessToken = sessionStorage.getItem("accessToken")
                     // const result = await getErpSignOutFetch(accessToken)
                     // if (result.isSuccess) {
-                    navigate("/kt-fruit-back-office", {
+                    navigate("/charif-beef-back-office", {
                       state: null,
                     });
                     navigate("/");
@@ -183,7 +146,7 @@ export default function ERP(props) {
                   }}
                   style={{ height: "100%" }}
                 >
-                  <Menu.Item key="manage-banner">
+                  <Menu.Item key="manage-product">
                     <label
                       style={{
                         paddingLeft: 10,
@@ -191,73 +154,7 @@ export default function ERP(props) {
                         cursor: "pointer",
                       }}
                     >
-                      จัดการ Banner
-                    </label>
-                  </Menu.Item>
-                  <Menu.Item key="manage-best-selling">
-                    <label
-                      style={{
-                        paddingLeft: 10,
-                        marginBottom: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      จัดการผลิตภัณฑ์ขายดี
-                    </label>
-                  </Menu.Item>
-                  <Menu.Item key="manage-coconut">
-                    <label
-                      style={{
-                        paddingLeft: 10,
-                        marginBottom: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      จัดการผลิตภัณฑ์จากมะพร้าว
-                    </label>
-                  </Menu.Item>
-                  <Menu.Item key="manage-mango">
-                    <label
-                      style={{
-                        paddingLeft: 10,
-                        marginBottom: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      จัดการผลิตภัณฑ์จากมะม่วง
-                    </label>
-                  </Menu.Item>
-                  <Menu.Item key="manage-seasonal">
-                    <label
-                      style={{
-                        paddingLeft: 10,
-                        marginBottom: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      จัดการผลิตภัณฑ์จากผลไม้ตามฤดูกาล
-                    </label>
-                  </Menu.Item>
-                  <Menu.Item key="manage-dried">
-                    <label
-                      style={{
-                        paddingLeft: 10,
-                        marginBottom: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      ผลิตภัณฑ์ผลไม่อบแห้ง
-                    </label>
-                  </Menu.Item>
-                  <Menu.Item key="manage-thammang">
-                    <label
-                      style={{
-                        paddingLeft: 10,
-                        marginBottom: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      ผลิตภัณฑ์อื่นๆ
+                      จัดการผลิตภัณฑ์
                     </label>
                   </Menu.Item>
                 </Menu>
