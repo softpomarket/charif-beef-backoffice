@@ -26,7 +26,7 @@ const App = ({ authorized, firebase, user }) => (
           }
         />
 
-        {/* <Route path="/:id">Page not found!</Route> */}
+       
         <Route exact path="/:id" element={<div>Page not found!</div>}></Route>
       </Routes>
     </Router>
